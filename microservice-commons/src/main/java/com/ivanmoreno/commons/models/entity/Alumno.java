@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"id", "nombre", "apellido"})
+@EqualsAndHashCode(exclude = {"createAt"})
 @Entity
 @Table(name = "alumnos")
 public class Alumno {
