@@ -21,8 +21,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(exclude = {"createAt", "preguntas"})
 @AllArgsConstructor
 @Entity
 @Table(name = "examenes")
