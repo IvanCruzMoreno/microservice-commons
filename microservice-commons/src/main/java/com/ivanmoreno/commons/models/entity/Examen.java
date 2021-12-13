@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -24,7 +26,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(exclude = {"createAt", "preguntas"})
+@EqualsAndHashCode(exclude = {"createAt", "preguntas", "asignatura"})
 @AllArgsConstructor
 @Entity
 @Table(name = "examenes")
@@ -46,6 +48,10 @@ public class Examen {
 			   orphanRemoval = true,
 			   mappedBy = "examen")
 	private List<Pregunta> preguntas;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "asignatura_id", referencedColumnName = "id")
+	private Asignatura asignatura;
 	
 	@PrePersist
 	public void prePersist() {
