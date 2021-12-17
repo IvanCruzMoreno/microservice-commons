@@ -18,6 +18,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -52,10 +53,14 @@ public class Examen {
 			   mappedBy = "examen")
 	private List<Pregunta> preguntas;
 	
+	@JsonIgnoreProperties(value = {"handler", "hibernateLazyInitializer"}, allowSetters = true)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "asignatura_id", referencedColumnName = "id")
 	@NotNull
 	private Asignatura asignatura;
+	
+	@Transient
+	private boolean respondido;
 	
 	@PrePersist
 	public void prePersist() {
